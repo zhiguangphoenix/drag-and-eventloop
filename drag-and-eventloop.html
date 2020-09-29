@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag-and-eventloop</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/0.0.0-0c756fb-f7f79fd/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/0.0.0-0c756fb-f7f79fd/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./react-draggable.min.js"></script>
+    <style>
+        .demo {
+            border: 1px solid black;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        const Demo = (props) => {
+
+            let canClick = true;
+            const _handleDraging = (e) => {
+                canClick = false;
+            }
+            const _handleDragStop = (e) => {
+
+                setTimeout(() => {
+                    canClick = true;
+                }, 0);
+            }
+            return (
+                <ReactDraggable onDrag={_handleDraging} onStop={_handleDragStop}>
+                    <div className="demo" onClick={() => { if(canClick) {alert('被点击了!')} }}>
+                        拖拽区域
+                    </div>
+                </ReactDraggable>
+            )
+        };
+        ReactDOM.render(<Demo/>, document.getElementById('app'))
+    </script>
+</body>
+</html>

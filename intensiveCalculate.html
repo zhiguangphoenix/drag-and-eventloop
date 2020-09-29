@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intensive calculate</title>
+</head>
+<body>
+    <button id="start">开始计算</button>
+    <button id="do">响应页面操作</button>
+    <script>
+        let i = 0;
+        let start = Date.now();
+
+        function count() {
+
+            setTimeout(() => {
+                count();
+            }, 0);
+
+            // 做一个繁重的任务
+            for (let j = 0; j < 1e6; j++) {
+                i++;
+            }
+
+            if (i === 1e9) {
+                alert("Done in " + (Date.now() - start) + 'ms');
+            }
+        }
+
+        const btn = document.getElementById('start');
+        btn.onclick = count;
+
+        const doBtn = document.getElementById('do');
+        doBtn.onclick = () => {
+            console.log('响应了');
+        }
+        
+    </script>
+</body>
+</html>
